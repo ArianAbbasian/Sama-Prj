@@ -1,27 +1,109 @@
+/* styles/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
-  font-family: "Vazir";
-  src: url("/fonts/Vazir-Regular.woff2") format("woff2");
-  font-weight: 400;
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazir-Regular.woff2') format('woff2');
+  font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: "Vazir";
-  src: url("/fonts/Vazir-Bold.woff2") format("woff2");
-  font-weight: 700;
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazir-Bold.woff2') format('woff2');
+  font-weight: bold;
   font-style: normal;
-  font-display: swap;
 }
 
-/* تنظیمات عمومی برای بدنه سایت */
-html,
+/* RTL Base Styles */
+html {
+  direction: rtl;
+}
+
 body {
-  font-family: "Vazir", sans-serif;
+  font-family: 'Vazirmatn', sans-serif;
   direction: rtl;
   text-align: right;
   margin: 0;
   padding: 0;
-  background-color: #fafafa;
-  color: #333;
+  overflow-x: hidden;
+}
+
+/* Fix for Material-UI RTL and mobile */
+.MuiDrawer-paper {
+  right: 0 !important;
+  left: auto !important;
+}
+
+.MuiAppBar-root {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 600px) {
+  .MuiDrawer-paper {
+    width: 85% !important;
+  }
+  
+  .MuiListItemIcon-root {
+    min-width: 40px !important;
+  }
+}
+
+/* Ensure content doesn't get hidden */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #2d2d2d;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+}
+
+/* Mobile touch improvements */
+@media (max-width: 900px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .MuiButton-root {
+    min-height: 44px; /* Better touch targets */
+  }
+  
+  .MuiIconButton-root {
+    padding: 8px; /* Better touch targets */
+  }
 }
