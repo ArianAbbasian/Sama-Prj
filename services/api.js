@@ -1,21 +1,24 @@
 // services/api.js
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
-const BASE_URL = 'https://api.samateb.ir/API/v1';
+const BASE_URL = 'https://api.samateb.ir/API';
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
+  timeout: 10000,
 });
 
+// Interceptor برای اضافه کردن توکن به هدرها
 api.interceptors.request.use(
   (config) => {
-    const token = Cookies.get('token');
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `${token}`;
+      console.log('Token added to request:', token.substring(0, 20) + '...');
     }
     return config;
   },
@@ -24,11 +27,16 @@ api.interceptors.request.use(
   }
 );
 
+// Interceptor برای هندل کردن خطاهای 401
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('API Response received');
+    return response;
+  },
   (error) => {
+    console.log('API Error:', error.response?.status);
     if (error.response?.status === 401) {
-      Cookies.remove('token');
+      removeToken();
       if (typeof window !== 'undefined') {
         window.location.href = '/';
       }
@@ -36,5 +44,27 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// توابع کمکی برای مدیریت توکن
+export const getToken = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+};
+
+export const setToken = (token) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('token', token);
+    console.log('Token saved to localStorage');
+  }
+};
+
+export const removeToken = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('token');
+    console.log('Token removed from localStorage');
+  }
+};
 
 export default api;

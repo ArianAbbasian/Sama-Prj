@@ -8,8 +8,6 @@ import {
   Menu,
   MenuItem,
   Box,
-  useMediaQuery,
-  Badge,
 } from "@mui/material";
 import {
   AccountCircle,
@@ -17,16 +15,18 @@ import {
   Brightness7,
   Menu as MenuIcon,
   ExitToApp,
-  MenuOpen,
 } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import { useTheme } from "../../contexts/ThemeContext";
+import { logout } from "../../store/authSlice";
+import { removeToken } from "../../services/api";
 
 export default function Header({ onDrawerToggle }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
+  const dispatch = useDispatch();
   const { darkMode, toggleDarkMode } = useTheme();
-  const isMobile = useMediaQuery("(max-width: 900px)");
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,17 +37,24 @@ export default function Header({ onDrawerToggle }) {
   };
 
   const handleLogout = () => {
-    alert("عملکرد خروج کاربر (در حالت طراحی فعال نیست)");
+    // پاک کردن توکن و state
+    removeToken();
+    dispatch(logout());
     handleClose();
+
+    // انتقال به صفحه اصلی
+    router.push("/");
   };
 
   return (
     <AppBar
       position="fixed"
+      elevation={2}
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
         width: "100%",
         right: 0,
+        left: "auto !important",
       }}
     >
       <Toolbar>
@@ -57,22 +64,17 @@ export default function Header({ onDrawerToggle }) {
           aria-label="open drawer"
           onClick={onDrawerToggle}
           edge="start"
-          sx={{ mr: 2 }}
+          sx={{
+            ml: 2,
+          }}
         >
-          {isMobile ? (
-            <Badge color="secondary" variant="dot">
-              <MenuIcon />
-            </Badge>
-          ) : (
-            <MenuOpen />
-          )}
+          <MenuIcon />
         </IconButton>
 
         <Typography
           variant="h6"
           component="div"
           sx={{ flexGrow: 1, textAlign: "right" }}
-          className="pr-3"
         >
           سامانه سلامت
         </Typography>
@@ -110,17 +112,10 @@ export default function Header({ onDrawerToggle }) {
             onClose={handleClose}
           >
             <MenuItem onClick={handleLogout}>
-              <ExitToApp sx={{ ml: 1 }} />
-              خروج کاربر
+              <ExitToApp sx={{ ml: 1 }} className="text-red-500" />
+              خروج از سیستم
             </MenuItem>
-            <MenuItem onClick={toggleDarkMode}>
-              {darkMode ? (
-                <Brightness7 sx={{ ml: 1 }} />
-              ) : (
-                <Brightness4 sx={{ ml: 1 }} />
-              )}
-              {darkMode ? "حالت روشن" : "حالت تاریک"}
-            </MenuItem>
+            {/* حذف آیتم تغییر تم از منو */}
           </Menu>
         </Box>
       </Toolbar>

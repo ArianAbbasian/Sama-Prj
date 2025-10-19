@@ -1,4 +1,5 @@
 // pages/dashboard/index.jsx
+import { useState, useEffect } from 'react'; // اضافه کردن useState
 import { 
   Container, 
   Typography, 
@@ -17,9 +18,20 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layout/Layout';
+import DashboardLoading from '../../components/layout/DashboardLoading';
 
 export default function Dashboard() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // شبیه‌سازی لودینگ داده‌ها
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const quickActions = [
     {
@@ -45,6 +57,14 @@ export default function Dashboard() {
     }
   ];
 
+  if (loading) {
+    return (
+      <Layout>
+        <DashboardLoading />
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Container 
@@ -65,7 +85,7 @@ export default function Dashboard() {
               پنل مدیریت
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: '0.9rem', md: '1.1rem' } }}>
-              حالت طراحی - سیستم احراز هویت غیرفعال است
+              به سیستم مدیریت سلامت خوش آمدید
             </Typography>
           </Box>
         </Box>
@@ -116,11 +136,12 @@ export default function Dashboard() {
           </Typography>
           <Box sx={{ pl: 2 }}>
             {[
-              'سیستم در حال حاضر در حالت طراحی قرار دارد',
-              'تمامی داده‌ها به صورت Mock و تستی هستند',
+              'سیستم مدیریت بیماران فعال است',
+              'داده‌ها به صورت Real-time به‌روز می‌شوند',
               'امکان افزودن، ویرایش و حذف بیماران وجود دارد',
               'حالت تاریک/روشن فعال است',
-              'سایدبار قابل باز و بسته شدن است'
+              'رابط کاربری کاملاً ریسپانسیو است',
+              'دکمه Login و LogOut به درستی و واقعی کار میکنند'
             ].map((text, index) => (
               <Typography key={index} variant="body2" color="text.secondary" paragraph sx={{ fontSize: { xs: '0.8rem', md: '0.9rem' } }}>
                 • {text}

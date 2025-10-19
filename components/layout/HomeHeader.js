@@ -4,13 +4,22 @@ import {
   Toolbar, 
   Typography, 
   IconButton,
-  Box
+  Box,
+  Button
 } from '@mui/material';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { Brightness4, Brightness7, Dashboard } from '@mui/icons-material';
+import { useRouter } from 'next/router';
 import { useTheme } from '../../contexts/ThemeContext';
+import { getToken } from '../../services/api';
 
 export default function HomeHeader() {
+  const router = useRouter();
   const { darkMode, toggleDarkMode } = useTheme();
+  const token = getToken();
+
+  const goToDashboard = () => {
+    router.push('/dashboard');
+  };
 
   return (
     <AppBar 
@@ -27,6 +36,21 @@ export default function HomeHeader() {
         </Typography>
         
         <Box display="flex" alignItems="center" gap={1}>
+          {/* اگر توکن وجود داره، دکمه دشبورد نشان بده */}
+          {token && (
+            <Button
+              color="inherit"
+              startIcon={<Dashboard />}
+              onClick={goToDashboard}
+              sx={{ 
+                color: 'white',
+                display: { xs: 'none', sm: 'flex' }
+              }}
+            >
+              پنل مدیریت
+            </Button>
+          )}
+
           {/* دکمه تغییر تم */}
           <IconButton
             color="inherit"

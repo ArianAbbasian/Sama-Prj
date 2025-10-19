@@ -24,6 +24,12 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    // اضافه کردن کلاس برای dark mode scrollbar
+    if (darkMode) {
+      document.body.classList.add('dark-mode-scrollbar');
+    } else {
+      document.body.classList.remove('dark-mode-scrollbar');
+    }
   }, [darkMode]);
 
   const toggleDarkMode = () => {
@@ -46,24 +52,27 @@ export function ThemeProvider({ children }) {
       },
     },
     typography: {
-      fontFamily: '"Vazirmatn", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Vazirmatn", "Vazir", "Helvetica", "Arial", sans-serif',
       h1: {
-        fontWeight: 'bold',
+        fontWeight: 700,
       },
       h2: {
-        fontWeight: 'bold',
+        fontWeight: 700,
       },
       h3: {
-        fontWeight: 'bold',
+        fontWeight: 700,
       },
       h4: {
-        fontWeight: 'bold',
+        fontWeight: 700,
       },
       h5: {
-        fontWeight: 'bold',
+        fontWeight: 700,
       },
       h6: {
-        fontWeight: 'bold',
+        fontWeight: 700,
+      },
+      button: {
+        fontWeight: 500,
       },
     },
     transitions: {
@@ -109,6 +118,20 @@ export function ThemeProvider({ children }) {
         styleOverrides: {
           root: {
             direction: 'rtl',
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            fontFamily: '"Vazirmatn", "Vazir", sans-serif',
+          },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            fontFamily: '"Vazirmatn", "Vazir", sans-serif',
           },
         },
       },

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '../contexts/ThemeContext';
+import RouteGuard from '../components/RouteGuard';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -17,7 +18,9 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <ThemeProvider>
         <CssBaseline />
-        <Component {...pageProps} />
+        <RouteGuard>
+          <Component {...pageProps} />
+        </RouteGuard>
       </ThemeProvider>
     </Provider>
   );

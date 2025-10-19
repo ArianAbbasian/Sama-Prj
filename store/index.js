@@ -1,12 +1,11 @@
- // '/store/index.js'
-
+// store/index.js
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import patientReducer from './mockPatientSlice'; 
+import patientReducer from './patientSlice'; 
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    patients: patientReducer, 
+    patients: patientReducer,
   },
 });

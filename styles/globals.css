@@ -4,18 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* فونت Vazirmatn */
 @font-face {
   font-family: 'Vazirmatn';
-  src: url('/fonts/Vazir-Regular.woff2') format('woff2');
-  font-weight: normal;
+  src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Vazirmatn';
-  src: url('/fonts/Vazir-Bold.woff2') format('woff2');
-  font-weight: bold;
+  src: url('/fonts/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* RTL Base Styles */
@@ -24,18 +35,28 @@ html {
 }
 
 body {
-  font-family: 'Vazirmatn', sans-serif;
+  font-family: 'Vazirmatn', 'Vazir', sans-serif;
   direction: rtl;
   text-align: right;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-weight: 400;
 }
 
-/* Fix for Material-UI RTL and mobile */
+/* Fix for Material-UI RTL and animations */
 .MuiDrawer-paper {
   right: 0 !important;
   left: auto !important;
+  transform: translateX(0) !important;
+}
+
+.MuiDrawer-paperAnchorRight {
+  transform: translateX(100%) !important;
+}
+
+.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
+  transform: translateX(0) !important;
 }
 
 .MuiAppBar-root {
@@ -43,15 +64,9 @@ body {
   left: auto !important;
 }
 
-/* Mobile optimizations */
-@media (max-width: 600px) {
-  .MuiDrawer-paper {
-    width: 85% !important;
-  }
-  
-  .MuiListItemIcon-root {
-    min-width: 40px !important;
-  }
+/* Smooth transitions for drawer */
+.MuiDrawer-root .MuiDrawer-paper {
+  transition: transform 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms !important;
 }
 
 /* Ensure content doesn't get hidden */
@@ -60,9 +75,32 @@ main {
   z-index: 1;
 }
 
+/* Material-UI components RTL fixes */
+.MuiTypography-root {
+  font-family: 'Vazirmatn', 'Vazir', sans-serif !important;
+}
+
+.MuiButton-root {
+  font-family: 'Vazirmatn', 'Vazir', sans-serif !important;
+}
+
+.MuiTableCell-root {
+  font-family: 'Vazirmatn', 'Vazir', sans-serif !important;
+  text-align: right;
+}
+
+.MuiInputBase-root {
+  font-family: 'Vazirmatn', 'Vazir', sans-serif !important;
+  text-align: right;
+}
+
+.MuiFormLabel-root {
+  font-family: 'Vazirmatn', 'Vazir', sans-serif !important;
+}
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -71,7 +109,7 @@ main {
 
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -79,31 +117,23 @@ main {
 }
 
 /* Dark mode scrollbar */
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
-    background: #2d2d2d;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #555;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #777;
-  }
+.dark-mode-scrollbar ::-webkit-scrollbar-track {
+  background: #2d2d2d;
 }
 
-/* Mobile touch improvements */
-@media (max-width: 900px) {
-  body {
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .MuiButton-root {
-    min-height: 44px; /* Better touch targets */
-  }
-  
-  .MuiIconButton-root {
-    padding: 8px; /* Better touch targets */
-  }
+.dark-mode-scrollbar ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+.dark-mode-scrollbar ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Custom animation classes */
+.drawer-open {
+  transform: translateX(0) !important;
+}
+
+.drawer-closed {
+  transform: translateX(100%) !important;
 }

@@ -2,10 +2,13 @@
   "name": "sama-prj",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ArianAbbasian.github.io/Sama-Prj",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,6 +26,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18"
   }
