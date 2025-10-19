@@ -1,10 +1,15 @@
 // next.config.mjs
 /** @type {import('next').NextConfig} */
+
+const isGithubPages = process.env.NODE_ENV === 'production' && process.env.GITHUB_PAGES;
+
 const nextConfig = {
-  output: 'export',
   trailingSlash: true,
-  basePath: '/Sama-Prj', 
-  assetPrefix: '/Sama-Prj/', 
+  ...(isGithubPages && {
+    output: 'export',
+    basePath: '/Sama-Prj',
+    assetPrefix: '/Sama-Prj/',
+  }),
   images: {
     unoptimized: true
   },

@@ -1,5 +1,5 @@
 // pages/dashboard/index.jsx
-import { useState, useEffect } from 'react'; // اضافه کردن useState
+import { useState, useEffect } from 'react'; 
 import { 
   Container, 
   Typography, 
@@ -25,7 +25,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // شبیه‌سازی لودینگ داده‌ها
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -77,7 +77,7 @@ export default function Dashboard() {
           px: { xs: 1, sm: 2, md: 3 }
         }}
       >
-        {/* هدر دشبورد */}
+
         <Box display="flex" alignItems="center" gap={2} mb={4}>
           <DashboardIcon sx={{ fontSize: { xs: 30, md: 40 }, color: 'primary.main' }} />
           <Box flex={1}>
@@ -90,7 +90,7 @@ export default function Dashboard() {
           </Box>
         </Box>
 
-        {/* کارت‌های اقدامات سریع */}
+        
         <Grid container spacing={2} mb={4}>
           {quickActions.map((action, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -122,7 +122,7 @@ export default function Dashboard() {
           ))}
         </Grid>
 
-        {/* اطلاعات سیستم */}
+   
         <Paper 
           elevation={2} 
           sx={{ 

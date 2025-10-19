@@ -43,7 +43,7 @@ export const patientService = {
     try {
       console.log("Creating patient with data:", patientData);
 
-      // اعتبارسنجی اضافی در سمت کلاینت
+   
       const birthDate = new Date(patientData.dateOfBirth);
       const today = new Date();
 
@@ -60,7 +60,7 @@ export const patientService = {
         throw new Error("سن بیمار باید حداقل 1 سال باشد");
       }
 
-      // فرمت تاریخ برای API - باید به صورت ISO string باشه
+      
       const formattedData = {
         name: patientData.name,
         email: patientData.email,
@@ -84,7 +84,6 @@ export const patientService = {
     } catch (error) {
       console.error("Create Patient Error:", error);
 
-      // خطای دقیق‌تر برگردون
       if (error.response) {
         throw new Error(
           `خطای سرور: ${error.response.status} - ${
@@ -108,7 +107,7 @@ export const patientService = {
       console.log("isActive value:", patientData.isActive);
       console.log("isActive type:", typeof patientData.isActive);
 
-      // اعتبارسنجی داده‌های ورودی
+
       if (!patientData) {
         throw new Error("داده‌های بیمار ارائه نشده است");
       }
@@ -117,12 +116,11 @@ export const patientService = {
         throw new Error("تمامی فیلدهای الزامی باید پر شوند");
       }
 
-      // تست ساختارهای مختلف برای isActive
       const formattedData = {
         name: patientData.name,
         email: patientData.email,
         dateOfBirth: new Date(patientData.dateOfBirth).toISOString(),
-        isActive: patientData.isActive, // همینطور که هست
+        isActive: patientData.isActive, 
       };
 
       console.log("📤 Data being sent to API:", formattedData);
@@ -142,7 +140,7 @@ export const patientService = {
     } catch (error) {
       console.error("💥 Update Patient Error:", error);
 
-      // خطای دقیق‌تر برگردون
+    
       if (error.response) {
         console.error("Response error details:", error.response);
         if (error.response.status === 404) {
@@ -184,7 +182,7 @@ export const patientService = {
     } catch (error) {
       console.error("Delete Patient Error:", error);
 
-      // خطای دقیق‌تر برگردون
+ 
       let finalErrorMessage = "خطا در حذف بیمار";
 
       if (error.response) {

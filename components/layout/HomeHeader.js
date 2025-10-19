@@ -36,7 +36,7 @@ export default function HomeHeader() {
         </Typography>
         
         <Box display="flex" alignItems="center" gap={1}>
-          {/* اگر توکن وجود داره، دکمه دشبورد نشان بده */}
+          
           {token && (
             <Button
               color="inherit"
@@ -51,7 +51,7 @@ export default function HomeHeader() {
             </Button>
           )}
 
-          {/* دکمه تغییر تم */}
+         
           <IconButton
             color="inherit"
             onClick={toggleDarkMode}

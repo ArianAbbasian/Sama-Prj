@@ -12,7 +12,7 @@ const api = axios.create({
   timeout: 10000,
 });
 
-// Interceptor برای اضافه کردن توکن به هدرها
+
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -27,7 +27,7 @@ api.interceptors.request.use(
   }
 );
 
-// Interceptor برای هندل کردن خطاهای 401
+
 api.interceptors.response.use(
   (response) => {
     console.log('API Response received');
@@ -45,7 +45,7 @@ api.interceptors.response.use(
   }
 );
 
-// توابع کمکی برای مدیریت توکن
+
 export const getToken = () => {
   if (typeof window !== 'undefined') {
     return localStorage.getItem('token');

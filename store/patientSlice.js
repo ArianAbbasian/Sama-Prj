@@ -13,7 +13,7 @@ const patientSlice = createSlice({
   reducers: {
     startLoading: (state) => {
       state.loading = true;
-      state.error = null; // خطای قبلی رو پاک کن
+      state.error = null; 
     },
     getPatientsSuccess: (state, action) => {
       state.loading = false;
@@ -57,12 +57,12 @@ export const createPatient = (patientData) => async (dispatch) => {
 
     console.log("Creating patient in slice...");
 
-    // اول بیمار رو ایجاد کن
+
     await patientService.createPatient(patientData);
 
     console.log("Patient created, fetching updated list...");
 
-    // سپس لیست کامل رو مجدد بگیر
+
     const patients = await patientService.getPatients();
 
     console.log("Updated patients list received:", patients);
@@ -92,7 +92,7 @@ export const updatePatient = (patientData) => async (dispatch) => {
     console.log("Patient ID:", patientData.id);
     console.log("Update data:", patientData);
 
-    // اعتبارسنجی داده‌ها
+
     if (!patientData || !patientData.id) {
       throw new Error("داده‌های بیمار نامعتبر است");
     }
@@ -101,7 +101,7 @@ export const updatePatient = (patientData) => async (dispatch) => {
       throw new Error("تمامی فیلدهای الزامی باید پر شوند");
     }
 
-    // اول بیمار رو آپدیت کن
+
     await patientService.updatePatient(patientData.id, {
       name: patientData.name,
       email: patientData.email,
@@ -111,7 +111,7 @@ export const updatePatient = (patientData) => async (dispatch) => {
 
     console.log("Patient updated, fetching updated list...");
 
-    // سپس لیست کامل رو مجدد بگیر
+ 
     const patients = await patientService.getPatients();
 
     console.log("Updated patients list after edit:", patients);
@@ -139,13 +139,13 @@ export const deletePatient = (id) => async (dispatch) => {
 
     console.log("Deleting patient in slice, ID:", id);
 
-    // اول بیمار رو حذف کن
+
     const deleteResult = await patientService.deletePatient(id);
     console.log("Delete service result:", deleteResult);
 
     console.log("Patient deleted, fetching updated list...");
 
-    // سپس لیست کامل رو مجدد بگیر
+
     const patients = await patientService.getPatients();
 
     console.log("Updated patients list after deletion:", patients);

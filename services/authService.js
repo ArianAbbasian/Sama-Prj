@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setToken, getToken, removeToken } from './api';
 
 export const authService = {
-  // دریافت توکن از API
+
   login: async () => {
     try {
       console.log('Calling API...');
@@ -18,9 +18,9 @@ export const authService = {
       console.log('Full API Response:', response);
       console.log('Response data:', response.data);
       
-      // بررسی ساختار response
+    
       if (response.data && response.data.isSuccessed) {
-        // توکن از result.credential باید گرفته بشه
+        
         const token = response.data.result?.credential;
         
         if (token) {
@@ -57,12 +57,12 @@ export const authService = {
     }
   },
 
-  // بررسی وجود توکن معتبر
+
   isAuthenticated: () => {
     return !!getToken();
   },
 
-  // خروج کاربر
+
   logout: () => {
     removeToken();
   }

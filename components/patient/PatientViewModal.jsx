@@ -95,7 +95,7 @@ export default function PatientViewModal({ open, patient, onClose }) {
       
       <DialogContent>
         <Grid container spacing={3} sx={{ mt: 1 }}>
-          {/* اطلاعات اصلی */}
+         
           <Grid item xs={12}>
             <Box display="flex" alignItems="center" gap={2} mb={2}>
               <Person color="primary" />
@@ -158,7 +158,7 @@ export default function PatientViewModal({ open, patient, onClose }) {
             </Box>
           </Grid>
 
-          {/* اطلاعات شناسه */}
+    
           <Grid item xs={12}>
             <Divider />
             <Box sx={{ mt: 2 }}>

@@ -24,7 +24,7 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
-    // اضافه کردن کلاس برای dark mode scrollbar
+   
     if (darkMode) {
       document.body.classList.add('dark-mode-scrollbar');
     } else {

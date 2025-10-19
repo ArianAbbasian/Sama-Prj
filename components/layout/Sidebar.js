@@ -46,7 +46,7 @@ export default function Sidebar({ onMobileClose }) {
       backgroundColor: (theme) => theme.palette.mode === 'dark' ? '#1e1e1e' : '#2c3e50',
       color: 'white'
     }}>
-      {/* هدر سایدبار - فقط در موبایل */}
+     
       {onMobileClose && (
         <Box sx={{ 
           p: 2, 
@@ -67,7 +67,7 @@ export default function Sidebar({ onMobileClose }) {
         </Box>
       )}
 
-      {/* محتوای سایدبار */}
+      
       <Box sx={{ flexGrow: 1, p: onMobileClose ? 1 : 2 }}>
         <List>
           <ListItem disablePadding>

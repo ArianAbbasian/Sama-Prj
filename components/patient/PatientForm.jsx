@@ -40,14 +40,14 @@ export default function PatientForm({ open, patient, onClose }) {
     if (patient) {
       console.log("Editing patient:", patient);
 
-      // فرمت تاریخ برای input type="date" - تبدیل از ISO به YYYY-MM-DD
+      
       let formattedDate = "";
       if (patient.dateOfBirth) {
-        // اگر تاریخ به صورت ISO string هست
+        
         if (patient.dateOfBirth.includes("T")) {
           formattedDate = patient.dateOfBirth.split("T")[0];
         } else {
-          // اگر فرمت دیگه‌ای داره
+          
           formattedDate = patient.dateOfBirth;
         }
       }
@@ -72,18 +72,18 @@ export default function PatientForm({ open, patient, onClose }) {
     setFieldErrors({ name: "", email: "", dateOfBirth: "" });
   }, [patient, open]);
 
-  // اعتبارسنجی ایمیل
+ 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // اعتبارسنجی تاریخ تولد
+ 
   const validateDateOfBirth = (dateString) => {
     if (!dateString)
       return { isValid: false, message: "تاریخ تولد الزامی است" };
 
-    // چک کردن فرمت YYYY-MM-DD
+    
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (!dateRegex.test(dateString)) {
       return { isValid: false, message: "فرمت تاریخ باید YYYY-MM-DD باشد" };
@@ -92,12 +92,12 @@ export default function PatientForm({ open, patient, onClose }) {
     const inputDate = new Date(dateString);
     const today = new Date();
 
-    // چک کردن اینکه تاریخ معتبر هست
+    
     if (isNaN(inputDate.getTime())) {
       return { isValid: false, message: "تاریخ نامعتبر است" };
     }
 
-    // چک کردن اینکه تاریخ از امروز بیشتر نباشه
+  
     if (inputDate > today) {
       return {
         isValid: false,
@@ -105,13 +105,12 @@ export default function PatientForm({ open, patient, onClose }) {
       };
     }
 
-    // چک کردن سن منطقی (مثلاً بیشتر از 150 سال نباشه)
     const age = today.getFullYear() - inputDate.getFullYear();
     if (age > 150) {
       return { isValid: false, message: "سن بیمار باید کمتر از 150 سال باشد" };
     }
 
-    // چک کردن سن منطقی (مثلاً کمتر از 1 سال نباشه)
+    
     if (age < 1) {
       return { isValid: false, message: "سن بیمار باید حداقل 1 سال باشد" };
     }
@@ -119,7 +118,7 @@ export default function PatientForm({ open, patient, onClose }) {
     return { isValid: true, message: "" };
   };
 
-  // اعتبارسنجی بلادرنگ فیلدها
+
   const validateField = (name, value) => {
     switch (name) {
       case "name":
@@ -157,14 +156,14 @@ export default function PatientForm({ open, patient, onClose }) {
       [name]: newValue,
     }));
 
-    // اعتبارسنجی بلادرنگ
+ 
     const error = validateField(name, newValue);
     setFieldErrors((prev) => ({
       ...prev,
       [name]: error,
     }));
 
-    // پاک کردن خطای کلی هنگام تغییر فیلد
+    
     if (formError) setFormError("");
   };
 
@@ -177,7 +176,7 @@ export default function PatientForm({ open, patient, onClose }) {
 
     setFieldErrors(errors);
 
-    // چک کردن اگر هیچ خطایی وجود نداره
+   
     const hasErrors = Object.values(errors).some((error) => error !== "");
     return !hasErrors;
   };
@@ -222,7 +221,7 @@ export default function PatientForm({ open, patient, onClose }) {
     }
   };
 
-  // محاسبه سن برای نمایش به کاربر
+
   const calculateAge = (dateString) => {
     if (!dateString) return null;
     const birthDate = new Date(dateString);
@@ -249,7 +248,7 @@ export default function PatientForm({ open, patient, onClose }) {
           {patient ? "ویرایش بیمار" : "ایجاد بیمار جدید"}
         </DialogTitle>
         <DialogContent>
-          {/* نمایش خطاها */}
+         
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
@@ -305,10 +304,10 @@ export default function PatientForm({ open, patient, onClose }) {
                   (age !== null ? `سن: ${age} سال` : "فرمت: YYYY-MM-DD")
                 }
                 inputProps={{
-                  max: new Date().toISOString().split("T")[0], // حداکثر تاریخ امروز
+                  max: new Date().toISOString().split("T")[0], 
                   min: new Date(new Date().getFullYear() - 150, 0, 1)
                     .toISOString()
-                    .split("T")[0], // حداقل 150 سال پیش
+                    .split("T")[0], 
                 }}
               />
             </Grid>

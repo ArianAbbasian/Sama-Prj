@@ -39,11 +39,11 @@ export default function Home() {
   const [localToken, setLocalToken] = useState(null);
 
   useEffect(() => {
-    // چک کردن توکن هنگام لود صفحه
+    
     const token = getToken();
     setLocalToken(token);
 
-    // اگر توکن وجود داره، به دشبورد برو
+
     if (token) {
       router.push("/dashboard");
     }
@@ -60,7 +60,7 @@ export default function Home() {
       router.push("/dashboard");
     } else {
       console.log("Login failed:", result.payload?.error);
-      // خطا خودش در کامپوننت نمایش داده می‌شه
+  
     }
   };
 
@@ -68,7 +68,7 @@ export default function Home() {
     router.push("/dashboard");
   };
 
-  // اگر توکن وجود داره، loading نشان بده
+
   if (localToken) {
     return (
       <>
@@ -159,7 +159,7 @@ export default function Home() {
               alignItems="center"
               sx={{ height: "100%" }}
             >
-              {/* بخش متن و CTA */}
+          
               <Grid item xs={12} md={6}>
                 <Box
                   sx={{
@@ -264,7 +264,7 @@ export default function Home() {
                 </Box>
               </Grid>
 
-              {/* بخش تصویر/آیکون */}
+          
               <Grid item xs={12} md={6}>
                 <Box
                   sx={{
@@ -286,7 +286,7 @@ export default function Home() {
               </Grid>
             </Grid>
 
-            {/* ویژگی‌ها - در پایین صفحه */}
+            
             <Grid container spacing={3} sx={{ mt: { xs: 2, md: 4 } }}>
               {features.map((feature, index) => (
                 <Grid item xs={6} sm={6} md={3} key={index}>
@@ -338,7 +338,7 @@ export default function Home() {
               ))}
             </Grid>
 
-            {/* اطلاعات پایین صفحه */}
+          
             <Paper
               sx={{
                 mt: 3,

@@ -63,14 +63,14 @@ const stringAvatar = (name) => {
   };
 };
 
-// تابع برای فرمت تاریخ
+
 const formatDate = (dateString) => {
   if (!dateString) return "-";
   const date = new Date(dateString);
   return date.toLocaleDateString("fa-IR");
 };
 
-// تابع برای محاسبه سن
+
 const calculateAge = (dateOfBirth) => {
   if (!dateOfBirth) return "-";
   const birthDate = new Date(dateOfBirth);
@@ -88,7 +88,7 @@ const calculateAge = (dateOfBirth) => {
   return age;
 };
 
-// تابع برای دریافت مقدار ایمن از patient
+
 const getPatientValue = (patient, key, defaultValue = "-") => {
   if (!patient || patient[key] === null || patient[key] === undefined) {
     return defaultValue;
@@ -114,14 +114,13 @@ export default function PatientTable({ onEdit }) {
   const [selectedPatient, setSelectedPatient] = useState(null);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
-  // مشکل اینجاست - این useEffect داره مدام dispatch رو صدا می‌زنه
-  // دریافت لیست بیماران فقط یکبار هنگام mount شدن کامپوننت
+ 
   useEffect(() => {
-    // فقط اگر patients خالی هست یا نیاز به refresh داریم
+  
     if (patients.length === 0) {
       dispatch(getPatients());
     }
-  }, [dispatch, patients.length]); // اضافه کردن patients.length به dependencies
+  }, [dispatch, patients.length]); 
 
   const handleView = (patient) => {
     console.log("Viewing patient:", patient);
@@ -196,7 +195,7 @@ export default function PatientTable({ onEdit }) {
 
   return (
     <Box sx={{ width: "100%", overflow: "hidden" }}>
-      {/* نمایش تعداد بیماران */}
+ 
       <Box
         sx={{
           mb: 2,
@@ -210,7 +209,7 @@ export default function PatientTable({ onEdit }) {
         </Typography>
       </Box>
 
-      {/* Snackbar برای نمایش پیام */}
+  
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}

@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* فونت Vazirmatn */
+
 @font-face {
   font-family: 'Vazirmatn';
   src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');

@@ -37,12 +37,12 @@ export default function Header({ onDrawerToggle }) {
   };
 
   const handleLogout = () => {
-    // پاک کردن توکن و state
+    
     removeToken();
     dispatch(logout());
     handleClose();
 
-    // انتقال به صفحه اصلی
+    
     router.push("/");
   };
 
@@ -58,7 +58,7 @@ export default function Header({ onDrawerToggle }) {
       }}
     >
       <Toolbar>
-        {/* دکمه همبرگری */}
+        
         <IconButton
           color="inherit"
           aria-label="open drawer"

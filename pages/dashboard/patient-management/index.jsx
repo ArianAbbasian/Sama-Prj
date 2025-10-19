@@ -27,18 +27,18 @@ export default function PatientManagement() {
   const [formOpen, setFormOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
 
-  // همه useEffectها رو بیرون از شرط‌ها قرار بدید
+
   useEffect(() => {
   dispatch(getPatients()).finally(() => {
     setLocalLoading(false);
   });
 }, [dispatch]);
 
-  // بررسی پارامتر action در URL
+
   useEffect(() => {
     if (action === "create") {
       setFormOpen(true);
-      // پاک کردن پارامتر از URL
+
       router.replace("/dashboard/patient-management", undefined, {
         shallow: true,
       });
@@ -64,7 +64,7 @@ export default function PatientManagement() {
     dispatch(getPatients());
   };
 
-  // شرط لودینگ باید بعد از همه hookها بیاد
+
   if (loading || localLoading) {
     return (
       <Layout>
@@ -85,7 +85,7 @@ export default function PatientManagement() {
           px: { xs: 1, sm: 2, md: 3 },
         }}
       >
-        {/* هدر صفحه */}
+
         <Box
           display="flex"
           alignItems="center"
@@ -132,14 +132,14 @@ export default function PatientManagement() {
           </Box>
         </Box>
 
-        {/* نمایش خطا */}
+
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
             {error}
           </Alert>
         )}
 
-        {/* جدول بیماران */}
+ 
         <Paper
           elevation={0}
           sx={{ p: { xs: 1, md: 2 }, backgroundColor: "transparent" }}
@@ -147,7 +147,7 @@ export default function PatientManagement() {
           <PatientTable onEdit={handleEdit} />
         </Paper>
 
-        {/* فرم بیمار */}
+
         <PatientForm
           open={formOpen}
           patient={selectedPatient}

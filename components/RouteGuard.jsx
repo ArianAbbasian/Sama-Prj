@@ -15,16 +15,16 @@ export default function RouteGuard({ children }) {
     const checkAuth = () => {
       const token = getToken();
       
-      // اگر توکن وجود داره، state رو آپدیت کن
+     
       if (token) {
         dispatch(loginSuccess(token));
       }
 
-      // اگر در صفحه اصلی هستیم و توکن داریم، به دشبورد برویم
+     
       if (router.pathname === '/' && token) {
         router.push('/dashboard');
       } 
-      // اگر در دشبورد هستیم و توکن نداریم، به صفحه اصلی برویم
+   
       else if (router.pathname.startsWith('/dashboard') && !token) {
         router.push('/');
       }
@@ -35,7 +35,7 @@ export default function RouteGuard({ children }) {
     checkAuth();
   }, [router, dispatch, isAuthenticated]);
 
-  // هنگام چک کردن auth، loading نشان بده
+  
   if (isChecking) {
     return (
       <div style={{ 
